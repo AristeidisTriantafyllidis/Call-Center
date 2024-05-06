@@ -1,10 +1,10 @@
 import React from "react";
-
+import Data from "./Data";
 export default function DetailCard(props){
 
     return(
 <div>
-    <button>Back to calls</button>
+    <button onClick={() => props.switch()}>Back to calls</button>
     <h2>Call Details</h2>
 <p> Direction {props.direction}</p>
 <p>From {props.from} </p>

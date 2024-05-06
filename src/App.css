@@ -114,3 +114,8 @@ color: gray;
  color:grey;
  
 }
+
+.seconds{
+  display: flex;
+  justify-content: end;
+}
