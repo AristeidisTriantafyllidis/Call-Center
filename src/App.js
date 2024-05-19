@@ -10,46 +10,47 @@ function App() {
   const [loading, setLoading] = React.useState(true)
   const [display, setDisplay] = React.useState(true)
   const [selectedCall, setSelectedCall] = React.useState(null)
-
+  const [identification,setIdentification]=React.useState(null)
+  const [checkboxes,setCheckBoxes]=React.useState({})
 
   React.useEffect(() => {
     fetch("https://call-center-mu.vercel.app/calls", {
       headers: {
         "X-User-Id": "Ariss"
-      }
+              }
     })
+
       .then(res => res.json())
       .then(data => {
         setAllCalls(data);
         setLoading(false)
-      })
+        })
 
-
-  }, [])
+//catch
+  }, []) 
 
   React.useEffect(() => {
-    if (selectedCall !== null) {
-      fetch(`https://call-center-mu.vercel.app/calls/${selectedCall}`, {
+  
+    if (identification !== null) {
+      
+      fetch(`https://call-center-mu.vercel.app/calls/${identification}`, {
         headers: {
           "X-User-Id": "Ariss"
         }
       })
         .then(res => res.json())
         .then(data => {
-          setSelectedCall(data);
-
+             setSelectedCall(data)
         })
 
     }
-  }, [])
+  }, [identification])
 
 
   function toggleScreen(id) {
     setDisplay(!display)
-    const updateSelectedCall = allCalls?.calls.find((item) => item.id === id)
-    setSelectedCall(updateSelectedCall)
-
-  }
+    setIdentification(id)
+     }
 
   function deleteCall(id) {
     const updateCalls = allCalls?.calls?.filter((item) => item.id !== id);
@@ -66,8 +67,15 @@ function App() {
     })
 
   }
+  // if(checkboxes.missed){
+//   if(allCalls.calls.call_type==="missed"){
+
+//}
+// }
 
   const Main = allCalls?.calls?.map((data) => {
+    console.log("cae")
+   if(Object.keys(checkboxes).length === 0 && checkboxes.constructor === Object){
     return (
       <MainCard
         key={data.id}
@@ -82,7 +90,11 @@ function App() {
         switch={toggleScreen}
       />
     );
-  });
+  }
+  else{
+    //for
+  }
+});
 
   let Detail = null
   if (selectedCall !== null) {
@@ -102,7 +114,7 @@ function App() {
       />
     );
   }
-  console.log(selectedCall)
+
 
   let page;
 
@@ -122,10 +134,47 @@ function App() {
   }
 
 
+//{"name":"missed","value":true},"name":"answered","value":true},"name":"missed","value":true}
+function handleChange(e){
+  const target=e.target
+  const value=target.checked
+  const name=target.name
+setCheckBoxes(values=>({...values,[name]:value}))
+}
 
+console.log(allCalls)
+
+console.log(checkboxes)
   return (
     <div className="App">
       <Header />
+      <div>
+        <p>Call type</p>
+      
+      <label>Missed
+        <input type='checkbox' name="missed"
+        checked={checkboxes.missed} onChange={handleChange}/>
+      </label>
+      <label>Answered
+        <input type='checkbox' name="answered"
+        checked={checkboxes.answered} onChange={handleChange}/>
+      </label>
+      <label>Voicemail
+        <input type='checkbox' name="voicemail"
+        checked={checkboxes.voicemail} onChange={handleChange}/>
+      </label>
+      </div>
+      <div>
+        <p>Direction </p>
+        <label>Inbound
+        <input type='checkbox' name="inbound"
+        checked={checkboxes.inbound} onChange={handleChange}/>
+      </label>
+        <label>Outbound
+        <input type='checkbox' name="outbound"
+        checked={checkboxes.outbound} onChange={handleChange}/>
+      </label>
+      </div>
       {page}
 
     </div>
