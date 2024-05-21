@@ -1,7 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
-import React from 'react';
 
 
 
@@ -23,14 +22,10 @@ test ('renders your page is loading',()=>{
 expect(loading).toBeInTheDocument();
 })
 
-test('renders activity feed',async ()=>{
-  render(<App />)
-  await screen.findByText(/Activity feed/i,{timeout:8000})
-  expect(screen.getByText(/Activity feed/i)).toBeInTheDocument
- 
-})
 
-const mockData= {
+test ('renders calls ', async ()=>{
+  global.fetch=jest.fn()
+  const mockData= {
       calls:[
         {
         "id": "1",
@@ -42,11 +37,16 @@ const mockData= {
         "is_archived": false,
         "created_at": "2025-04-10T14:32:00Z"
     }
-  ]}
-test ('List renders succeessfully',async ()=>{
-  render(<App allCalls={mockData}/>)
-  await screen.findByText("+33 6 12 34 56 78",{timeout:8000})
-  expect(screen.getByText("+33 6 12 34 56 78")).toBeInTheDocument();
-  
+  ]};
+fetch.mockResolvedValue({
+  json:()=>Promise.resolve(mockData)
 })
+  render(<App />)
+  await waitFor(()=>{
+    expect(screen.getByText("Activity feed")).toBeInTheDocument();
+    expect(screen.getByText("+33 6 12 34 56 78")).toBeInTheDocument();
+  })
+})
+
+
 
