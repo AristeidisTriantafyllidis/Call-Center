@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
-
+import MainCard from './Components/MainCard';
 
 
 test('renders call center header', () => {
@@ -21,6 +21,7 @@ test ('renders your page is loading',()=>{
   const loading=screen.getByText(/Your page is loading/i)
 expect(loading).toBeInTheDocument();
 })
+
 
 
 test ('renders calls ', async ()=>{
