@@ -38,7 +38,7 @@ fetch.mockResolvedValue({
 })
   render(<App />)
   await waitFor(()=>{
-    expect(screen.getByText("Activity feed")).toBeInTheDocument();
+    expect(screen.getByText("Activity feeeed")).toBeInTheDocument();
     expect(screen.getByText("+33 6 12 34 56 78")).toBeInTheDocument();
   })
 })
