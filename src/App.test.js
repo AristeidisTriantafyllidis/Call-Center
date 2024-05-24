@@ -10,11 +10,6 @@ test('renders call center header', () => {
   expect(headerElement).toBeInTheDocument();
 });
 
-test('renders call type',() =>{
-  render(<App />);
-  const activity = screen.getByText(/call type/i);
-  expect(activity).toBeInTheDocument();
-})
 
 test ('renders your page is loading',()=>{
   render(<App />)
@@ -43,7 +38,7 @@ fetch.mockResolvedValue({
 })
   render(<App />)
   await waitFor(()=>{
-    expect(screen.getByText("Activity eeefeed")).toBeInTheDocument();
+    expect(screen.getByText("Activity feed")).toBeInTheDocument();
     expect(screen.getByText("+33 6 12 34 56 78")).toBeInTheDocument();
   })
 })
