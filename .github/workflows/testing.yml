@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master,Week-3]
+    branches: [master, Week-3]
   pull_request:
-    branches: [master,Week-3]
+    branches: [master, Week-3]
 
 jobs:
   build-and-test:
@@ -16,4 +16,5 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npm test
+      - run: npx prettier . --check
       - run: npm run build
