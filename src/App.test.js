@@ -10,8 +10,12 @@ test("renders call center header", () => {
 
 test("renders your page is loading", () => {
   render(<App />);
-  const loading = screen.getByText(/Your page is loading/i);
-  expect(loading).toBeInTheDocument();
+
+  const loadingSpinner = screen.getByRole("progressbar", {
+    name: /tail-spin-loading/i,
+  });
+
+  expect(loadingSpinner).toBeInTheDocument();
 });
 
 test("renders calls ", async () => {
