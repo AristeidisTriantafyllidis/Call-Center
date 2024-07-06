@@ -167,14 +167,6 @@ h3 {
   color: #666;
 }
 
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70vh;
-  flex-direction: column;
-}
-
 @media (max-width: 768px) {
   .App {
     padding: 0 14px 30px;
@@ -217,4 +209,14 @@ h3 {
     flex-direction: column;
     gap: 6px;
   }
+}
+
+.loading-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
 }

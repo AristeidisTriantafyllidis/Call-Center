@@ -1,10 +1,15 @@
 import React from "react";
+import { TailSpin } from "react-loader-spinner";
 
 export default function LoadingPage() {
   return (
-    <div className="loading">
-      <h1>Your page is Loading</h1>
-      <img src="./loadingImg.png" alt="Loading page" />
+    <div className="loading-page-wrapper">
+      <TailSpin
+        ariaLabel="tail-spin-loading"
+        color="#000000"
+        height="90"
+        width="90"
+      />
     </div>
   );
 }
