@@ -7,12 +7,7 @@ import DetailCard from './Components/DetailCard';
 
 function App() {
 
-const [display,setDisplay]=React.useState(false)
-  
-  const screenChange=React.useEffect(()=>{
-     setDisplay(!display)
-  },[])
-
+  const [display, setDisplay] = React.useState(true)
   const [allCalls, setAllCalls] = React.useState(Data);
 
 
@@ -21,8 +16,8 @@ const [display,setDisplay]=React.useState(false)
     return (
 
       <MainCard
-      
-      key={mock.id}
+
+        key={mock.id}
         direction={mock.direction}
         from={mock.from}
         to={mock.to}
@@ -32,9 +27,9 @@ const [display,setDisplay]=React.useState(false)
         status={mock.call_type}
         id={mock.id}
         deleteCall={deleteCall}
-       change={screenChange}
-       
-       
+        switch={setDisplay}
+
+
       />
     );
   });
@@ -53,6 +48,7 @@ const [display,setDisplay]=React.useState(false)
         hour={hour}
         archive={mock.is_archived}
         notes={mock.notes ? mock.notes[0].content : "No notes for this call"}
+        switch={setDisplay}
       />
     );
   });
@@ -65,12 +61,12 @@ const [display,setDisplay]=React.useState(false)
     setAllCalls(updateCalls);
   }
 
-  
+
   return (
     <div className="App">
       <Header />
-      {display? <h3>Activity feed</h3>:""}
-      {display? Main:Detail}
+      {display ? <h3>Activity feed</h3> : ""}
+      {display ? Main : Detail}
 
     </div>
   );
