@@ -1,5 +1,7 @@
 import React from "react";
 import Data from "./Data";
+
+
 export default function DetailCard(props){
 
     return(
@@ -14,6 +16,7 @@ export default function DetailCard(props){
 <p>Date {props.date},{props.hour}</p>
 <p>Archived {props.archive?"Yes":"No"}</p>
 <p>{props.notes}</p>
+<p></p>
 </div> 
 
 )

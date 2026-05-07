@@ -10,7 +10,7 @@ function App() {
   const [display, setDisplay] = React.useState(true)
   const [allCalls, setAllCalls] = React.useState(Data);
 
-
+  const toggleScreen = () => { setDisplay(!display) }
   const Main = allCalls.map((mock) => {
     const [date, hour] = mock.created_at.replace("Z", "").split("T");
     return (
@@ -27,7 +27,7 @@ function App() {
         status={mock.call_type}
         id={mock.id}
         deleteCall={deleteCall}
-        switch={setDisplay}
+        switch={toggleScreen}
 
 
       />
@@ -37,6 +37,7 @@ function App() {
   const Detail = Data.map((mock) => {
     const [date, hour] = mock.created_at.replace("Z", "").split("T");
     return (
+
       <DetailCard
         key={mock.id}
         direction={mock.direction}
@@ -48,7 +49,7 @@ function App() {
         hour={hour}
         archive={mock.is_archived}
         notes={mock.notes ? mock.notes[0].content : "No notes for this call"}
-        switch={setDisplay}
+        switch={toggleScreen}
       />
     );
   });
