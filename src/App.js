@@ -9,12 +9,17 @@ function App() {
 
   const [display, setDisplay] = React.useState(true)
   const [allCalls, setAllCalls] = React.useState(Data);
-  const [idCall, seIdCall] = React.useState(1)
-
+  const [idCall, seIdCall] = React.useState(0)
+  const [selectedCall, setSelectedCall] = React.useState(allCalls[0])
+  const updateSelectedCall = allCalls.find((item) => item.id === idCall)
+   console.log(updateSelectedCall);
+  
   function toggleScreen(id) {
     setDisplay(!display)
     seIdCall(id)
-    }
+    // setSelectedCall(updateSelectedCall)
+   
+  }
 
   const Main = allCalls.map((mock) => {
     const [date, hour] = mock.created_at.replace("Z", "").split("T");
@@ -33,34 +38,53 @@ function App() {
         id={mock.id}
         deleteCall={deleteCall}
         switch={toggleScreen}
+       
+        
+
 
 
       />
     );
   });
 
-   const Detail = 
-  //  const [date, hour] = mock.created_at.replace("Z", "").split("T");
-
- 
-     <DetailCard
-
-         key={Data[Number(idCall)-1].direction}
-         direction={Data[Number(idCall)-1].direction}
-         id={idCall}
-          from={Data[Number(idCall)-1].from}
-         to={Data[Number(idCall)-1].to}
-         status={Data[Number(idCall)-1].call_type}
-         duration={Data[Number(idCall)-1].duration}
-         date={Data[Number(idCall)-1].created_at}
-        // hour={hour}
-         archive={Data[Number(idCall)-1].is_archived}
-         notes={Data[Number(idCall)-1].notes ? Data[Number(idCall)-1].notes[0].content : "No notes for this call"}
-        switch={toggleScreen}
-      />
+  //  const Detail = 
+  //   // const [date, hour] = mock.created_at.replace("Z", "").split("T");
 
 
+  //    <DetailCard
 
+  //        key={Data[Number(idCall)-1].direction}
+  //        direction={Data[Number(idCall)-1].direction}
+  //        id={idCall}
+  //         from={Data[Number(idCall)-1].from}
+  //        to={Data[Number(idCall)-1].to}
+  //        status={Data[Number(idCall)-1].call_type}
+  //        duration={Data[Number(idCall)-1].duration}
+  //        date={Data[Number(idCall)-1].created_at}
+  //       // hour={hour}
+  //        archive={Data[Number(idCall)-1].is_archived}
+  //        notes={Data[Number(idCall)-1].notes ? Data[Number(idCall)-1].notes[0].content : "No notes for this call"}
+  //       switch={toggleScreen}
+  //     />
+
+
+
+
+
+  const Detail =
+    <DetailCard
+      key={selectedCall.id}
+      direction={selectedCall.direction}
+      id={selectedCall.id}
+      from={selectedCall.from}
+      to={selectedCall.to}
+      status={selectedCall.call_type}
+      duration={selectedCall.duration}
+      date={selectedCall.created_at}
+      archive={selectedCall.is_archived}
+      notes={selectedCall.notes ? selectedCall.notes[0].content : "No notes for this call"}
+      switch={toggleScreen}
+    />
 
 
   function deleteCall(id) {
