@@ -194,3 +194,8 @@ border-bottom:0.1px solid rgb(197, 197, 197);
   border-radius: none 20px;
   cursor: pointer;
 }
+
+.loading{
+  align-items: center;
+justify-content: center;
+}
