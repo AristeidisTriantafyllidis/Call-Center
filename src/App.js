@@ -41,7 +41,7 @@ function App() {
         })
 
     }
-  },[])
+  }, [])
 
 
   function toggleScreen(id) {
@@ -97,12 +97,12 @@ function App() {
         duration={selectedCall.duration}
         date={selectedCall.created_at}
         archive={selectedCall.is_archived}
-       notes={selectedCall.notes}
+        notes={selectedCall.notes}
         switch={toggleScreen}
       />
     );
   }
-console.log(selectedCall)
+  console.log(selectedCall)
 
   let page;
 

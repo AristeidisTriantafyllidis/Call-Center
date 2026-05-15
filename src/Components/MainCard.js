@@ -4,11 +4,11 @@ import React from "react";
 
 export default function MainCard(props) {
 
-const [date, hour] = props.date?.replace("Z", "").split("T");
+  const [date, hour] = props.date?.replace("Z", "").split("T");
   return (
 
     <div className="mainCard" >
-   
+
 
       <div className="main--Card" onClick={() => props.switch(props.id)}>
         <div className="status-card">
