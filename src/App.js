@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import Header from './Components/Header';
-import MainCard from './Components/MainCard';
-import DetailCard from './Components/DetailCard';
+import Header from './components/Header';
+import MainCard from './components/MainCard/MainCard';
+import DetailCard from './components/DetailCard/DetailCard';
 import LoadingPage from './LoadingErrors/LoadingPage';
+import ErrorPage from './LoadingErrors/ErrorPage';
 
 function App() {
   const [allCalls, setAllCalls] = React.useState(null);
@@ -11,39 +12,42 @@ function App() {
   const [display, setDisplay] = React.useState(true)
   const [selectedCall, setSelectedCall] = React.useState(null)
   const [identification, setIdentification] = React.useState(null)
-
+  const [pageError, setPageError] = React.useState(false)
 
   React.useEffect(() => {
     fetch("https://call-center-mu.vercel.app/calls", {
       headers: {
-        "X-User-Id": "Ariss"
+        "X-User-Id": "Aris"
       }
     })
-
+      
       .then(res => res.json())
       .then(data => {
         setAllCalls(data);
         setLoading(false)
       })
 
-
+      .catch(error => {
+        setLoading(false)
+        setPageError(true)
+      })
   }, [])
 
 
   React.useEffect(() => {
-
     if (identification !== null) {
-
       fetch(`https://call-center-mu.vercel.app/calls/${identification}`, {
         headers: {
-          "X-User-Id": "Ariss"
+          "X-User-Id": "Aris"
         }
       })
         .then(res => res.json())
         .then(data => {
           setSelectedCall(data)
         })
-
+        .catch(error => {
+          setPageError(true)
+        })
     }
   }, [identification])
 
@@ -53,25 +57,27 @@ function App() {
     setIdentification(id)
   }
 
+
   function deleteCall(id) {
     const updateCalls = allCalls?.calls?.filter((item) => item.id !== id);
-
     setAllCalls({ ...allCalls, calls: updateCalls, });
+
     fetch(`https://call-center-mu.vercel.app/calls/${id}/archive`, {
       method: "PATCH",
       headers: {
-        "X-User-Id": "Ariss"
+        "X-User-Id": "Aris"
       },
       body: JSON.stringify({
         is_archived: true
       })
     })
-
+      .catch(error => {
+        setPageError(true)
+      })
   }
 
 
   const Main = allCalls?.calls?.map((data) => {
-
 
     return (
       <MainCard
@@ -112,6 +118,9 @@ function App() {
   let page;
   if (loading) {
     page = <LoadingPage />;
+  }
+  else if (pageError === true) {
+    page = <ErrorPage />
   }
   else if (display === true) {
     page = (
