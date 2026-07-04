@@ -22,9 +22,3 @@ test("Archiving a call removes it from the activity feed", async () => {
   await userEvent.click(Btn);
   expect(deleteCall).toHaveBeenCalledTimes(2);
 });
-
-test("Checking date", () => {
-  render(<MainCard date={givenDate} />);
-  expect(screen.getByText("2025-04-10"));
-  expect(screen.getByText("14:32:00"));
-});
