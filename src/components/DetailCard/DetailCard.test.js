@@ -24,14 +24,14 @@ test("Detail Card renders Correctly", () => {
 
 test("Find button if exists", () => {
   render(<DetailCard date="2025-04-10T14:32:00Z" />);
-  const btn = screen.getByRole("button", { name: "Back to calls" });
+  const btn = screen.getByRole("button", { name: "← Back to Calls" });
   expect(btn).toBeInTheDocument();
 });
 
 test("Button calls the function", async () => {
   const checkFunction = jest.fn();
   render(<DetailCard date="2025-04-10T14:32:00Z" switch={checkFunction} />);
-  const btn = screen.getByRole("button", { name: "Back to calls" });
+  const btn = screen.getByRole("button", { name: "← Back to Calls" });
   await userEvent.click(btn);
   expect(checkFunction).toHaveBeenCalledTimes(1);
 });
