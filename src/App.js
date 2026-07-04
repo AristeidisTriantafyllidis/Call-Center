@@ -1,15 +1,11 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/Header";
-import MainCard from "./components/MainCard/MainCard";
-import DetailCard from "./components/DetailCard/DetailCard";
+import Header from "./Components/Header";
+import MainCard from "./Components/MainCard/MainCard";
+import DetailCard from "./Components/DetailCard/DetailCard";
 import LoadingPage from "./LoadingErrors/LoadingPage";
 import ErrorPage from "./LoadingErrors/ErrorPage";
-import {
-  fetchData,
-  fetchSpecificData,
-  updateDeleteCalls,
-} from "./services/api";
+
 function App() {
   const [allCalls, setAllCalls] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -19,7 +15,12 @@ function App() {
   const [pageError, setPageError] = React.useState(false);
 
   React.useEffect(() => {
-    fetchData()
+    fetch("https://call-center-mu.vercel.app/calls", {
+      headers: {
+        "X-User-Id": "Aris",
+      },
+    })
+      .then((res) => res.json())
       .then((data) => {
         setAllCalls(data);
         setLoading(false);
@@ -33,7 +34,12 @@ function App() {
 
   React.useEffect(() => {
     if (identification !== null) {
-      fetchSpecificData(identification)
+      fetch(`https://call-center-mu.vercel.app/calls/${identification}`, {
+        headers: {
+          "X-User-Id": "Aris",
+        },
+      })
+        .then((res) => res.json())
         .then((data) => {
           setSelectedCall(data);
         })
@@ -50,17 +56,19 @@ function App() {
 
   function deleteCall(id) {
     const updateCalls = allCalls?.calls?.filter((item) => item.id !== id);
+    setAllCalls({ ...allCalls, calls: updateCalls });
 
-    updateDeleteCalls(id)
-      .then((res) => {
-        if (res.ok) {
-          setAllCalls({ ...allCalls, calls: updateCalls });
-        }
-      })
-
-      .catch((error) => {
-        setPageError(true);
-      });
+    fetch(`https://call-center-mu.vercel.app/calls/${id}/archive`, {
+      method: "PATCH",
+      headers: {
+        "X-User-Id": "Aris",
+      },
+      body: JSON.stringify({
+        is_archived: true,
+      }),
+    }).catch((error) => {
+      setPageError(true);
+    });
   }
 
   const Main = allCalls?.calls?.map((data) => {
