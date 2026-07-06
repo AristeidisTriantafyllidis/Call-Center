@@ -1,5 +1,7 @@
 ## ☎️ Call Center inspired by [Aircall](https://aircall.io/).
 
+[![Snyk Security](https://snyk.io/test/github/AristeidisTriantafyllidis/Call-Center/badge.svg)](https://snyk.io/test/github/AristeidisTriantafyllidis/Call-Center)
+
 The call management interface provides a centralized, fully responsive platform for monitoring communication data. Users can browse real-time call logs, inspect detailed activity metrics, and securely archive historical records to ensure regulatory compliance and efficient data retention.
 <br/>
 
