@@ -115,7 +115,9 @@ function App() {
   } else if (display === true) {
     page = (
       <div>
-        <h3>Activity feed</h3>
+        <h3 className="mt-8 mb-5 text-2xl font-bold text-slate-800 tracking-tight">
+          Activity feed
+        </h3>
         {Main}
       </div>
     );
@@ -124,7 +126,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="max-w-[960px] w-full mx-auto px-6 pb-12 font-['Inter',sans-serif]">
       <Header />
       {page}
     </div>
