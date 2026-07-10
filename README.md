@@ -18,7 +18,7 @@ The call management interface provides a centralized, fully responsive platform 
 
 The project is fully deployed and available to view live:
 
-- 🌐 **Live Demo:** [dev-ready-project.vercel.app](https://dev-ready-project.vercel.app/)
+- 🌐 **Live Demo:** [Call center inspired by Aircall](https://call-center-by-aircall.vercel.app/)
 
 ### 💻 Local Development
 
